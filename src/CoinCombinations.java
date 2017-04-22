@@ -9,20 +9,17 @@ import java.util.Set;
  */
 public class CoinCombinations {
 
+    /**
+     * Test
+     */
     public static void main(String[] args) {
 
-        int[] coins = {500, 200, 100, 50, 20, 10, 5};
+        int[] coins = {5, 2, 1};
+        int amount = 50;
         long t = System.currentTimeMillis();
-        Set<Comb> c = combinations(coins, 150);
-        System.out.println("took " + (System.currentTimeMillis() - t));
-        //print(c);
-        System.out.println(c.size());
-    }
-
-    static void print(Set<Comb> c) {
-        for (Comb comb : c) {
-            System.out.println(comb);
-        }
+        Set<Comb> c = combinations(coins, amount);
+        System.out.println("took " + (System.currentTimeMillis() - t) + " ms, there are " + c.size() + " combinations");
+        print(c);
     }
 
     static Set<Comb> combinations(int[] coins, int amount) {
@@ -83,6 +80,12 @@ public class CoinCombinations {
         @Override
         public String toString() {
             return Arrays.toString(c);
+        }
+    }
+
+    static void print(Set<Comb> c) {
+        for (Comb comb : c) {
+            System.out.println(comb);
         }
     }
 }

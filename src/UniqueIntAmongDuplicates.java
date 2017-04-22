@@ -6,14 +6,8 @@ public class UniqueIntAmongDuplicates {
     public static void main(String[] args) {
 
         int[] ids = {4, 1, 4, 1, 3, 6, 6};
-
-        assertEquals(unique(ids), 3);
-    }
-
-    static void assertEquals(Object a, Object b) {
-        if (!a.equals(b)) {
-            throw new IllegalArgumentException("Test failed " + a + " does not equal " + b);
-        }
+        Test.assertEquals(unique(ids), 3);
+        System.out.println("Test succeeded");
     }
 
     static int unique(int[] ids) {

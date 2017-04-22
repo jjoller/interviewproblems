@@ -7,7 +7,7 @@ import java.util.List;
 public class PrimeFactorization {
 
     public static void main(String[] args) {
-        System.out.println(factorization(Integer.MAX_VALUE-1));
+        System.out.println(factorization(Integer.MAX_VALUE - 1));
     }
 
     static List<Integer> factorization(int n) {

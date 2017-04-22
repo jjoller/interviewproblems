@@ -4,8 +4,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+/**
+ * Textbook implementation of quicksort
+ */
 public class QuickSort {
 
+    /**
+     * Test
+     */
     public static void main(String[] args) {
 
         int n = 100;
@@ -16,10 +22,7 @@ public class QuickSort {
         }
 
         quicksort(0, n - 1, numbers);
-
         System.out.println(numbers);
-
-        //System.out.println(String.join(",\n", numbers.stream().map(i -> i + "").collect(Collectors.toList())));
     }
 
     static void quicksort(int low, int high, List<Integer> numbers) {

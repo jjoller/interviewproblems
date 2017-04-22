@@ -35,11 +35,4 @@ public class SuperPow {
         return base.modPow(exponent, mod).intValue();
     }
 
-    /*
-    public int superPow(int a, BigInteger exponent) {
-        if(exponent.)
-        BigInteger left = exponent.divide(new BigInteger("2"));
-        BigInteger right = exponent.subtract(left);
-    }*/
-
 }

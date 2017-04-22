@@ -7,50 +7,68 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Given a set of cards and a permutation
+ * Given two permutations, a target and a transformation. Calculate if a sorted permutation (0,1,2,...,n) can be
+ * transformed into the target permutation by applying the transformation multiple times.
+ *
+ * TODO is there a more efficient way?
+ *
  */
 public class Permutations {
 
+    /**
+     * Test
+     */
     public static void main(String[] args) {
-        int n = 52;
+
+        int n = 5;
         Random random = new Random();
 
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < 100000; i++) {
-            Permutation start = new Permutation(n);
-            Permutation permutation = new Permutation(n, random);
-            int s = allPermutations(start, permutation).size();
-            if (s > max) {
-                System.out.println(s);
-                max = s;
+        Permutation transformation = new Permutation(n, random);
+        Set<Permutation> permutations = allPermutations(new Permutation(n), transformation);
+
+        for (int i = 0; i < 100; i++) {
+            Permutation target = new Permutation(n, random);
+            if (permutations.contains(target)) {
+                System.out.println(target + " can be reached by " + transformation);
+            }else{
+                System.out.println(target + " can NOT be reached by " + transformation);
             }
         }
-        System.out.println(max);
     }
 
-    public static Set<Permutation> allPermutations(Permutation start, Permutation permutation) {
+    /**
+     * Calculate all the permutations that are possible by applying a given transformation to a given starting
+     * permutation
+     */
+    static Set<Permutation> allPermutations(Permutation target, Permutation transformation) {
 
         Set<Permutation> permutations = new HashSet<>();
-        while (!permutations.contains(start)) {
-            permutations.add(start);
-            start = start.apply(permutation);
+        while (!permutations.contains(target)) {
+            permutations.add(target);
+            target = target.apply(transformation);
         }
         return permutations;
     }
 
     static class Permutation implements Comparable<Permutation> {
 
-        public Permutation(int[] p) {
+        Permutation(int[] p) {
             this.p = p;
         }
 
-        public Permutation(int n) {
+        /**
+         * A sorted "permutation" (0,1,2,...,n)
+         */
+        Permutation(int n) {
             p = new int[n];
             for (int i = 0; i < n; i++)
                 p[i] = i;
         }
 
-        public Permutation(int n, Random random) {
+        /**
+         * Random permutation of a certain length
+         */
+        Permutation(int n, Random random) {
             p = new int[n];
             List<Integer> list = new ArrayList<>();
             for (int i = 0; i < n; i++)
@@ -62,7 +80,7 @@ public class Permutations {
 
         final int[] p;
 
-        public Permutation apply(Permutation p) {
+        Permutation apply(Permutation p) {
             if (p.p.length != this.p.length) {
                 throw new IllegalArgumentException();
             }
