@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -11,14 +10,25 @@ import java.util.stream.Stream;
 
 /**
  * https://codefights.com/interview/kEgA4DXcfXuriqGru
+ * <p>
+ * Given a sorted array of integers arr and an integer num, find all possible unique subsets of arr that add up to num.
+ * Both the array of subsets and the subsets themselves should be sorted in lexicographical order.
+ * <p>
+ * Example
+ * For arr = [1, 2, 3, 4, 5] and num = 5, the output should be
+ * sumSubsets(arr, num) = [[1, 4], [2, 3], [5]].
  */
 public class SumSubsets {
 
+    /**
+     * Test
+     */
     public static void main(String[] args) {
 
         SumSubsets s = new SumSubsets();
         int[] arr = {1, 2, 3};
-        System.out.println(s.toString(s.sumSubsets(arr, 1)));
+        Test.assertEquals(1, s.sumSubsets(arr, 1).length);
+        System.out.println("Tests succeeded");
     }
 
     int[][] sumSubsets(int[] arr, int num) {
@@ -44,8 +54,6 @@ public class SumSubsets {
             }
         }
 
-        printArray(a);
-
         // backtrack
         List<List<Integer>> toReturn = backtrack(arr.length, num, a, arr);
 
@@ -60,6 +68,7 @@ public class SumSubsets {
             }
         }
 
+        // sort
         Collections.sort(paths, (l1, l2) -> {
             for (int i = 0; i < Math.min(l1.size(), l2.size()); i++) {
                 if (!Objects.equals(l1.get(i), l2.get(i))) {
@@ -124,30 +133,5 @@ public class SumSubsets {
             merged.addAll(l2);
         return merged;
     }
-
-    String toString(int[][] a) {
-        List<String> inners = new ArrayList<>();
-        for (int i = 0; i < a.length; i++) {
-            List<String> inner = of(a[i]).map(element -> Arrays.toString(element) + "").collect(Collectors.toList());
-            inners.add(String.join(", ", inner) + "\n");
-        }
-        String s = "[" + String.join(", ", inners) + "]";
-        return s;
-    }
-
-    void printArray(boolean[][] a) {
-        List<String> inners = new ArrayList<>();
-        for (int i = 0; i < a.length; i++) {
-            List<String> inner = of(a[i]).map(element -> Arrays.toString(element) + "").collect(Collectors.toList());
-            inners.add(String.join(", ", inner) + "\n");
-        }
-        String s = "[" + String.join(", ", inners) + "]";
-        System.out.println(s);
-    }
-
-    <T> Stream<T> of(T... values) {
-        return Arrays.stream(values);
-    }
-
 
 }
