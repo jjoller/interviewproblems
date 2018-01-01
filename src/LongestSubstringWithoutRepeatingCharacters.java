@@ -3,9 +3,9 @@ import java.util.LinkedList;
 
 /**
  * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
- *
+ * <p>
  * Longest Substring Without Repeating Characters
- *
+ * <p>
  * <p>
  * Given a string, find the length of the longest substring without repeating characters.
  * <p>
@@ -21,13 +21,11 @@ import java.util.LinkedList;
 public class LongestSubstringWithoutRepeatingCharacters {
 
     public static void main(String[] args) {
-        Test.assertEquals(0, new Solution().lengthOfLongestSubstring(""));
-        Test.assertEquals(3, new Solution().lengthOfLongestSubstring("abcabcbb"));
-        Test.assertEquals(1, new Solution().lengthOfLongestSubstring("bbbbb"));
+        Test.assertEquals(0, new LongestSubstringWithoutRepeatingCharacters().lengthOfLongestSubstring(""));
+        Test.assertEquals(3, new LongestSubstringWithoutRepeatingCharacters().lengthOfLongestSubstring("abcabcbb"));
+        Test.assertEquals(1, new LongestSubstringWithoutRepeatingCharacters().lengthOfLongestSubstring("bbbbb"));
     }
-}
 
-class Solution {
     public int lengthOfLongestSubstring(String s) {
         LinkedHashSet<Character> subset = new LinkedHashSet<>();
         LinkedList<Character> subseq = new LinkedList<>();
