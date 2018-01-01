@@ -31,6 +31,7 @@ import java.util.Map;
  * [output] integer
  * <p>
  * The minimal cost of painting all the Painted Ladies so that no two adjacent houses are the same color.
+ * <p>
  */
 public class PaintHouses {
 
@@ -41,31 +42,29 @@ public class PaintHouses {
     }
 
     int paintHouses(int[][] cost) {
-        Map<Long, Integer> cache = new HashMap<>();
-        int n= 3;
+        int n = 3;
+        int[][] cache = new int[2][n];
+        int z = 0;
         for (int c = 0; c < n; c++) {
-            cache.put(key(0, c), cost[0][c]);
+            cache[z][c] = cost[0][c];
         }
         int min;
         for (int i = 1; i < cost.length; i++) {
             for (int c = 0; c < n; c++) {
                 min = Integer.MAX_VALUE;
-                for(int k=0;k<n;k++){
-                    if(c != k){
-                        min = Math.min(min, cost[i][c]+cache.get(key(i-1,k)));
+                for (int k = 0; k < n; k++) {
+                    if (c != k) {
+                        min = Math.min(min, cost[i][c] + cache[z][k]);
                     }
                 }
-                cache.put(key(i,c),min);
+                cache[(z + 1) % 2][c] = min;
             }
+            z = (z + 1) % 2;
         }
         min = Integer.MAX_VALUE;
-        for (int i = 0; i < n; i++) {
-            min = Math.min(min, cache.get(key(cost.length - 1, i)));
+        for (int c = 0; c < n; c++) {
+            min = Math.min(min, cache[z][c]);
         }
         return min;
-    }
-
-    long key(int i, int c) {
-        return i * 10 + c;
     }
 }
