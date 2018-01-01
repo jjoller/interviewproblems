@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * https://codefights.com/interview-practice/task/idSmSy6u2LNiNDjKw
  * <p>
@@ -31,4 +34,38 @@
  */
 public class PaintHouses {
 
+    public static void main(String[] args) {
+        int[][] cost = {{1, 1, 1}};
+        Test.assertEquals(1, new PaintHouses().paintHouses(cost));
+        System.out.println("Tests succeeded");
+    }
+
+    int paintHouses(int[][] cost) {
+        Map<Long, Integer> cache = new HashMap<>();
+        int n= 3;
+        for (int c = 0; c < n; c++) {
+            cache.put(key(0, c), cost[0][c]);
+        }
+        int min;
+        for (int i = 1; i < cost.length; i++) {
+            for (int c = 0; c < n; c++) {
+                min = Integer.MAX_VALUE;
+                for(int k=0;k<n;k++){
+                    if(c != k){
+                        min = Math.min(min, cost[i][c]+cache.get(key(i-1,k)));
+                    }
+                }
+                cache.put(key(i,c),min);
+            }
+        }
+        min = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            min = Math.min(min, cache.get(key(cost.length - 1, i)));
+        }
+        return min;
+    }
+
+    long key(int i, int c) {
+        return i * 10 + c;
+    }
 }
