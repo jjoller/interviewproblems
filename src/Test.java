@@ -11,7 +11,7 @@ public class Test {
 
     static void assertEquals(Object a, Object b) {
         if (!a.equals(b)) {
-            throw new TestFailedException(a + " does not equal " + b);
+            throw new TestFailedException(b + " does not equal " + a);
         }
     }
 
