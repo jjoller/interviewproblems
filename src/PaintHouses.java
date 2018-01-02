@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * https://codefights.com/interview-practice/task/idSmSy6u2LNiNDjKw
  * <p>
