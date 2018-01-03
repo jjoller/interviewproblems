@@ -9,22 +9,6 @@ import java.util.Stack;
  * Recall that you can only push or pop from a stack, and enqueue or dequeue from a queue.
  * <p>
  * For example, if the stack is [1, 2, 3, 4, 5], it should become [1, 5, 2, 4, 3]. If the stack is [1, 2, 3, 4], it should become [1, 4, 2, 3].
- * <p>
- * s: 1 2 3 4 5 6
- * <p>
- * q: 1 6
- * <p>
- * <p>
- * poll skip(4) poll poll skip(2) poll poll skip(0) poll
- * <p>
- * 2 5 3 4
- * <p>
- * 1 6 2 5 3 4
- * <p>
- * <p>
- * q: 3
- * <p>
- * s: 3
  */
 public class InterleaveStack {
     public static void main(String[] args) {
@@ -72,7 +56,7 @@ public class InterleaveStack {
     void interleaveStack(Stack<Integer> s) {
         Queue<Integer> q = new LinkedList<>();
         int n = s.size();
-        while (s.size() > 0) {  
+        while (s.size() > 0) {
             q.add(s.pop());
         }
 
